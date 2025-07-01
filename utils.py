@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 import os
 import base64
 import fitz
@@ -8,7 +9,9 @@ from llama_index.llms.nvidia import NVIDIA
 
 def set_environment_variables():
     """Set necessary environment variables."""
-    os.environ["NVIDIA_API_KEY"] = "" #set API key
+    load_dotenv()
+    api_key = os.getenv("NVIDIA_API_KEY")
+    os.environ["NVIDIA_API_KEY"] = api_key
 
 def get_b64_image_from_content(image_content):
     """Convert image content to base64 encoded string."""
