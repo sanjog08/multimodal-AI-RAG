@@ -3,7 +3,6 @@ import streamlit as st
 from llama_index.core import Settings
 from llama_index.core import VectorStoreIndex, StorageContext
 from llama_index.core.node_parser import SentenceSplitter
-from llama_index.vector_stores.milvus import MilvusVectorStore
 from llama_index.embeddings.nvidia import NVIDIAEmbedding
 from llama_index.llms.nvidia import NVIDIA
 
@@ -19,16 +18,9 @@ def initialize_settings():
     Settings.llm = NVIDIA(model="meta/llama-3.1-70b-instruct")
     Settings.text_splitter = SentenceSplitter(chunk_size=600)
 
-# Create index from documents
 def create_index(documents):
-    vector_store = MilvusVectorStore(
-            host = "127.0.0.1",
-            port = 19530,
-            dim = 1024
-    )
-    # vector_store = MilvusVectorStore(uri="./milvus_demo.db", dim=1024, overwrite=True) #For CPU only vector store
-    storage_context = StorageContext.from_defaults(vector_store=vector_store)
-    return VectorStoreIndex.from_documents(documents, storage_context=storage_context)
+    return VectorStoreIndex.from_documents(documents)
+
 
 # Main function to run the Streamlit app
 def main():
