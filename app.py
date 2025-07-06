@@ -30,9 +30,10 @@ def main():
     col1, col2 = st.columns([1, 2])
     
     with col1:
-        st.title("Multimodal RAG")
+        st.title("Sanjog Multimodal RAG")
+        print("DEBUG: app starts running......")
         
-        input_method = st.radio("Choose input method:", ("Upload Files", "Enter Directory Path"))
+        input_method = st.radio("Please choose your input method:", ("Upload Files", "Enter Directory Path"))
         
         if input_method == "Upload Files":
             uploaded_files = st.file_uploader("Drag and drop files here", accept_multiple_files=True)
